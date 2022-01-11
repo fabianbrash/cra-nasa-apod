@@ -7,6 +7,9 @@ RUN npm ci --production --silent
 COPY . .
 
 # Before building our app we need to add our ENV variable so we can have our API key
+ARG API_KEY=default_value
+ENV REACT_APP_NASA_KEY=${API_KEY}
+
 # Build our app
 RUN npm run build
 
@@ -17,4 +20,4 @@ RUN npm install -g serve --silent
 WORKDIR /opt/app
 USER 1000
 EXPOSE 5000
-CMD ["serve", "-s"]
+CMD ["serve", "-p", "5000"]
